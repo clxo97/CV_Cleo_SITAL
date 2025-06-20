@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cléo Sital - Cyber CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .cyber-card {
+            background: rgba(20, 20, 40, 0.9);
+            border: 2px solid #00ff41;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 1000px;
+            width: 95%;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ff41, #0066ff, #ff0066, #00ff41);
+            border-radius: 15px;
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 20px;
+        }
+
+        .name {
+            font-size: 2.5em;
+            color: #00ff41;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            margin-bottom: 10px;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
+            to { text-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(0, 255, 65, 0.6); }
+        }
+
+        .subtitle {
+            color: #66ffcc;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #00ff41;
+        }
+
+        .section-title {
+            color: #00ff41;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #66ffcc;
+        }
+
+        .contact-item {
+            color: #cccccc;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .skill-tag {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            padding: 5px 10px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 0.8em;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 255, 65, 0.2);
+            transform: scale(1.05);
+        }
+
+        .project {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(0, 102, 255, 0.1);
+            border-radius: 5px;
+            border-left: 3px solid #0066ff;
+        }
+
+        .project-title {
+            color: #66ccff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .challenge-section {
+            background: rgba(255, 0, 102, 0.1);
+            border: 2px solid #ff0066;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .challenge-title {
+            color: #ff0066;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .cipher-text {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #00ff41;
+            font-size: 0.95em;
+            line-height: 1.6;
+            border: 1px solid #333;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            white-space: pre-line;
+            overflow-x: auto;
+        }
+
+        .challenge-input {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 10px;
+        }
+
+        .challenge-btn {
+            background: linear-gradient(45deg, #ff0066, #0066ff);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .challenge-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 102, 0.5);
+        }
+
+        .success-message {
+            color: #00ff41;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .hint {
+            color: #ffcc00;
+            font-size: 0.9em;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .certification-compact {
+            padding: 15px !important;
+        }
+
+        .certification-compact .project {
+            margin-bottom: 5px;
+            padding: 8px;
+        }
+
+        .language-item {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .left-column,
+            .right-column {
+                gap: 15px;
+            }
+            
+            .name {
+                font-size: 2em;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+        }
+
+        .terminal-cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-card">
+        <div class="header">
+            <h1 class="name">CLÉO SITAL<span class="terminal-cursor">_</span></h1>
+            <p class="subtitle">🛡️ Recherche d'alternance en cybersécurité</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Colonne gauche - Informations personnelles et compétences -->
+            <div class="left-column">
+                <!-- Contact -->
+                <div class="contact-section">
+                    <h3 class="section-title" style="color: #66ffcc;">📞 Contact</h3>
+                    <span class="contact-item">📧 clestl971@gmail.com</span>
+                    <span class="contact-item">📱 06 21 53 49 39</span>
+                    <span class="contact-item">🌐 <a href="https://www.linkedin.com/in/cléo-sital-0b64a1312" target="_blank" style="color: #66ffcc; text-decoration: none;">LinkedIn</a></span>
+                    <span class="contact-item">📍 Le Kremlin Bicêtre</span>
+                    <span class="contact-item">🚗 Permis B</span>
+                </div>
+
+                <!-- Langues -->
+                <div class="section">
+                    <h3 class="section-title">🌍 Langues</h3>
+                    <div class="language-item"><strong>Anglais :</strong> B2</div>
+                    <div class="language-item"><strong>Espagnol :</strong> B1</div>
+                </div>
+
+                <!-- Compétences -->
+                <div class="section">
+                    <h3 class="section-title">💻 Langages de programmation</h3>
+                    <div class="skill-grid">
+                        <div class="skill-tag">C</div>
+                        <div class="skill-tag">OCaml</div>
+                        <div class="skill-tag">Python</div>
+                        <div class="skill-tag">SQL</div>
+                        <div class="skill-tag">Java</div>
+                        <div class="skill-tag">C++</div>
+                        <div class="skill-tag">JavaScript</div>
+                        <div class="skill-tag">Bash</div>
+                        <div class="skill-tag">Assembleur</div>
+                    </div>
+                </div>
+
+                <!-- Framework / outils -->
+                <div class="section">
+                    <h3 class="section-title">🛠️ Framework / outils</h3>
+                    <div class="skill-grid">
+                        <div class="skill-tag">React</div>
+                        <div class="skill-tag">Firebase</div>
+                        <div class="skill-tag">Docker</div>
+                        <div class="skill-tag">Git</div>
+                        <div class="skill-tag">Gitlab</div>
+                        <div class="skill-tag">GitHub</div>
+                        <div class="skill-tag">GNS3</div>
+                    </div>
+                    <br>
+                    <p><strong>IDE :</strong> Jetbrain (Intellij IDEA, Clion)</p>
+                    <p><strong>Environnement :</strong> Windows / Linux</p>
+                </div>
+
+                <!-- Soft skills -->
+                <div class="section">
+                    <h3 class="section-title">💼 Soft skills</h3>
+                    <p><strong>Gestion de projets :</strong> Agile/Scrum</p>
+                    <p><strong>Communication :</strong> Présentations de projets, rédaction de rapports académiques, RETEX</p>
+                    <p><strong>Travail en équipe :</strong> Collaboration sur des projets de groupe</p>
+                    <p><strong>Qualités :</strong> Curiosité - Autonomie - Adaptabilité</p>
+                </div>
+
+                <!-- Certification -->
+                <div class="section certification-compact">
+                    <h3 class="section-title">🎖️ Certification</h3>
+                    <div class="project">
+                        <div class="project-title">Brevet d'initiation à l'aéronautique (BIA)</div>
+                        <div>2020</div>
+                    </div>
+                </div>
+
+                <!-- Centre d'intérêts -->
+                <div class="section">
+                    <h3 class="section-title">🎯 Centre d'intérêts</h3>
+                    <p>Cybersécurité - Software engineering</p>
+                </div>
+            </div>
+
+            <!-- Colonne droite - Objectifs, Formation, Expérience, Bénévolat -->
+            <div class="right-column">
+                <!-- Objectifs -->
+                <div class="section">
+                    <h3 class="section-title">🎯 Objectifs</h3>
+                    <p style="line-height: 1.6; font-size: 1.1em;">
+                        Actuellement en école d'ingénieur pour un cursus de 3 ans en cybersécurité, je recherche une alternance au rythme de 2 semaines en école et 2 semaines en entreprise, afin de développer mes compétences techniques et participer activement à la protection des données, des infrastructures et des services numériques contre les risques de sécurité.
+                    </p>
+                </div>
+
+                <!-- Formation -->
+                <div class="section">
+                    <h3 class="section-title">🎓 Formation</h3>
+                    <div class="project">
+                        <div class="project-title">Cycle ingénieur Epita Paris (2024-2025)</div>
+                        <div>• Sciences de bases (mathématiques et informatique fondamentale)<br>
+                        • Sciences de l'ingénieur informaticien<br>
+                        • Management et culture de l'ingénieur<br>
+                        • Connaissances pour l'entreprise<br>
+                        • <em>Parcours entrepreneuriat</em></div>
+                    </div>
+                    <div class="project">
+                        <div class="project-title">CPGE - filière MPI (2022-2024)</div>
+                        <div>Lycée polyvalent Charles Coëffin</div>
+                    </div>
+                    <div class="project">
+                        <div class="project-title">Baccalauréat Général (2019-2022)</div>
+                        <div>Spécialités Mathématiques et NSI - mention Très bien<br>
+                        Lycée Yves Leborgne</div>
+                    </div>
+                </div>
+
+                <!-- Expérience -->
+                <div class="section">
+                    <h3 class="section-title">🚀 Expérience</h3>
+                    <div class="project">
+                        <div class="project-title">Projet Eplace</div>
+                        <div>Développement d'un client web collaboratif pour visualiser et modifier une toile intéractive en temps réel, en utilisant des sockets et une authentification JWT - Mai 2025</div>
+                    </div>
+                    <div class="project">
+                        <div class="project-title">Projet Java Web Service (JWS)</div>
+                        <div>Développement d'une API backend en utilisant une architecture en couche - Février 2025</div>
+                    </div>
+                    <div class="project">
+                        <div class="project-title">Projet Creeps</div>
+                        <div>Développement en Java d'un système autonome multithreadé interagissant avec un serveur REST dans un jeu stratégique en temps réel - Février 2025</div>
+                    </div>
+                    <div class="project">
+                        <div class="project-title">Projet 42sh</div>
+                        <div>Implémentation d'un Shell interactif respectant la norme POSIX - Janvier 2025</div>
+                    </div>
+                </div>
+
+                <!-- Bénévolat -->
+                <div class="section">
+                    <h3 class="section-title">🤝 Bénévolat</h3>
+                    <div class="project">
+                        <div class="project-title">Epibuddy - Epita</div>
+                        <div>Accompagnement d'étudiants internationaux à EPITA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Challenge conservée intacte -->
+        <div class="challenge-section">
+            <h3 class="challenge-title">🔐 CYBER CHALLENGE</h3>
+            <p>Analysez cette vulnérabilité et trouvez le flag !</p>
+            <p><strong>Scénario :</strong> Code d'authentification vulnérable trouvé sur un serveur</p>
+            
+            <div class="cipher-text" id="cipherText">
+<span style="color: #ff6666;">function</span> <span style="color: #66ccff;">authenticateUser</span>(<span style="color: #ffcc66;">username</span>, <span style="color: #ffcc66;">password</span>) {
+    <span style="color: #ff6666;">const</span> <span style="color: #ffcc66;">users</span> = [
+        {<span style="color: #66ff66;">name</span>: <span style="color: #ffff66;">"admin"</span>, <span style="color: #66ff66;">pass</span>: <span style="color: #ffff66;">"admin123"</span>},
+        {<span style="color: #66ff66;">name</span>: <span style="color: #ffff66;">"user"</span>, <span style="color: #66ff66;">pass</span>: <span style="color: #ffff66;">"password"</span>},
+        {<span style="color: #66ff66;">name</span>: <span style="color: #ffff66;">"guest"</span>, <span style="color: #66ff66;">pass</span>: <span style="color: #ffff66;">"guest"</span>}
+    ];
+    
+    <span style="color: #ff6666;">for</span>(<span style="color: #ff6666;">let</span> <span style="color: #ffcc66;">i</span> = <span style="color: #ff9999;">0</span>; <span style="color: #ffcc66;">i</span> < <span style="color: #ffcc66;">users</span>.<span style="color: #66ccff;">length</span>; <span style="color: #ffcc66;">i</span>++) {
+        <span style="color: #ff6666;">if</span>(<span style="color: #ffcc66;">users</span>[<span style="color: #ffcc66;">i</span>].<span style="color: #66ff66;">name</span> == <span style="color: #ffcc66;">username</span> && <span style="color: #ffcc66;">users</span>[<span style="color: #ffcc66;">i</span>].<span style="color: #66ff66;">pass</span> == <span style="color: #ffcc66;">password</span>) {
+            <span style="color: #ff6666;">return</span> <span style="color: #ffff66;">"ACCESS_GRANTED_FLAG{C0D3_1NJ3CT10N_V3RY_D4NG3R0U5}"</span>;
+        }
+    }
+    <span style="color: #ff6666;">return</span> <span style="color: #ffff66;">"ACCESS_DENIED"</span>;
+}
+
+<span style="color: #888888;">// Vulnérabilité : Mots de passe en dur + comparaison non sécurisée</span>
+            </div>
+            
+            <input type="text" class="challenge-input" id="flagInput" placeholder="Entrez le flag trouvé...">
+            <button class="challenge-btn" onclick="checkFlag()">VALIDER</button>
+            <div class="success-message" id="successMsg">🎉 Bravo ! Vous avez trouvé la vulnérabilité !</div>
+            <div class="hint">💡 Indice : Regardez attentivement le code d'authentification...</div>
+        </div>
+    </div>
+
+    <script>
+        function checkFlag() {
+            const input = document.getElementById('flagInput').value;
+            const correctFlag = "C0D3_1NJ3CT10N_V3RY_D4NG3R0U5";
+            
+            if (input.includes(correctFlag)) {
+                document.getElementById('successMsg').style.display = 'block';
+                document.getElementById('flagInput').style.borderColor = '#00ff41';
+            } else {
+                document.getElementById('flagInput').style.borderColor = '#ff0066';
+                setTimeout(() => {
+                    document.getElementById('flagInput').style.borderColor = '#00ff41';
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
+
